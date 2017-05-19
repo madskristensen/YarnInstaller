@@ -4,7 +4,9 @@
         <Identity Id="54ec7bf0-19bb-467f-a5a5-15ad0492653b" Version="0.5" Language="en-US" Publisher="Mads Kristensen" />
         <DisplayName>Yarn Installer</DisplayName>
         <Description xml:space="preserve">Makes it easy to restore npm packages using Yarn from within Visual Studio</Description>
+        <MoreInfo>https://github.com/madskristensen/YarnInstaller</MoreInfo>
         <License>Resources\LICENSE</License>
+        <ReleaseNotes>https://github.com/madskristensen/YarnInstaller/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Icon.png</PreviewImage>
         <Tags>yarn, npm</Tags>
