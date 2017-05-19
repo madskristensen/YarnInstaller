@@ -19,6 +19,15 @@ Right-click *package.json* in any web project to see the command for restoring u
 
 ![Context menu](art/context-menu.png)
 
+## Restore on saving package.json (VS2017 only)
+Automatically run `yarn install` when saving *package.json* by enabling it in the **Tools -> Options** dialog.
+
+![Web Options](art/web-options.png)
+
+Remember to disable the built-in `npm restore` when you do this (see below).
+
+This feature is restricted to work on Visual Studio 2017 only because Visual Studio 2015 doesn't have the option to disable automatic `npm install`.
+
 ## Disable npm restore (VS2017 only)
 By default Visual Studio will call `npm install` when *package.json* is saved and also when a project containing a *package.json* file is being opened.
 
