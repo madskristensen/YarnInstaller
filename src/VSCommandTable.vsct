@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <Extern href="stdidcmd.h"/>
+    <Extern href="vsshlids.h"/>
+
+    <Commands package="guidPackage">
+        <Buttons>
+            <Button guid="guidInstallCommandPackageCmdSet" id="InstallCommandId" priority="0x0200" type="Button">
+                <Parent guid="guidPackageManagementCommandSet" id="PackageProviderFileCommandMenuGroup" />
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <Strings>
+                    <ButtonText>Restore Packages (Yarn)</ButtonText>
+                </Strings>
+            </Button>
+        </Buttons>
+    </Commands>
+
+    <VisibilityConstraints>
+        <VisibilityItem guid="guidInstallCommandPackageCmdSet" id="InstallCommandId" context="guidAutoload" />
+    </VisibilityConstraints>
+
+    <Symbols>
+        <GuidSymbol name="guidPackage" value="{62ddb9fa-3968-4ba9-a4c3-bc0b60e819b7}" />
+        <GuidSymbol name="guidAutoload" value="{62ddb9fa-3968-4ba9-a4c3-bc0b60e819b7}" />
+
+        <GuidSymbol name="guidInstallCommandPackageCmdSet" value="{7db70b41-a427-475b-8ad1-80415be6eac7}">
+            <IDSymbol name="InstallCommandId" value="0x0100" />
+        </GuidSymbol>
+
+        <!-- Restore packages group -->
+        <GuidSymbol name="guidPackageManagementCommandSet" value="{b92a417b-195e-41e4-9391-64f7d025020d}">
+            <IDSymbol name="PackageProviderFileCommandMenuGroup" value="0x1022" />
+        </GuidSymbol>
+    </Symbols>
+</CommandTable>
