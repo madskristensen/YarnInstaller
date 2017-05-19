@@ -19,7 +19,7 @@ Right-click *package.json* in any web project to see the command for restoring u
 
 ![Context menu](art/context-menu.png)
 
-## Disable npm restore
+## Disable npm restore (VS2017 only)
 By default Visual Studio will call `npm install` when *package.json* is saved and also when a project containing a *package.json* file is being opened.
 
 To turn off the automatic calls to `npm install`, disable them in the **Tools -> Options** dialog.
