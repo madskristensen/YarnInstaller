@@ -1,26 +1,26 @@
-﻿using Microsoft.VisualStudio;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using System;
-using System.Runtime.InteropServices;
 
 namespace YarnInstaller
 {
-    [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+    [InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.guidPackageString)]
     [ProvideOptionPage(typeof(Options), "Web", Vsix.Name, 101, 102, true, new string[0], ProvidesLocalizedCategoryName = false)]
-    [ProvideAutoLoad(PackageGuids.guidAutoloadString)]
     [ProvideUIContextRule(PackageGuids.guidAutoloadString,
         name: "package.json",
         expression: "config",
         termNames: new[] { "config" },
         termValues: new[] { "HierSingleSelectionName:package.json$" })]
-    public sealed class YarnPackage : Package
+    public sealed class YarnPackage : AsyncPackage
     {
         private static Options _options;
-        private static object _syncRoot = new object();
+        private static readonly object _syncRoot = new object();
 
         public static Options Options
         {
@@ -41,8 +41,10 @@ namespace YarnInstaller
             }
         }
 
-        protected override void Initialize()
+        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+
             _options = (Options)GetDialogPage(typeof(Options));
             InstallCommand.Initialize(this);
         }

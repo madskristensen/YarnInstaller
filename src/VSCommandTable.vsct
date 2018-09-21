@@ -8,7 +8,6 @@
         <Buttons>
             <Button guid="guidInstallCommandPackageCmdSet" id="InstallCommandId" priority="0x0200" type="Button">
                 <Parent guid="guidPackageManagementCommandSet" id="PackageProviderFileCommandMenuGroup" />
-                <CommandFlag>DefaultInvisible</CommandFlag>
                 <CommandFlag>DynamicVisibility</CommandFlag>
                 <Strings>
                     <ButtonText>Restore Packages (Yarn)</ButtonText>
@@ -23,7 +22,7 @@
 
     <Symbols>
         <GuidSymbol name="guidPackage" value="{62ddb9fa-3968-4ba9-a4c3-bc0b60e819b7}" />
-        <GuidSymbol name="guidAutoload" value="{62ddb9fa-3968-4ba9-a4c3-bc0b60e819b7}" />
+        <GuidSymbol name="guidAutoload" value="{4b43c563-18aa-4fad-9ace-bc4318727c2c}" />
 
         <GuidSymbol name="guidInstallCommandPackageCmdSet" value="{7db70b41-a427-475b-8ad1-80415be6eac7}">
             <IDSymbol name="InstallCommandId" value="0x0100" />

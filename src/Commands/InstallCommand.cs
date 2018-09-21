@@ -8,7 +8,6 @@ namespace YarnInstaller
     internal sealed class InstallCommand
     {
         private readonly Package _package;
-        private string _cwd;
 
         private InstallCommand(Package package)
         {
@@ -17,8 +16,11 @@ namespace YarnInstaller
             if (ServiceProvider.GetService(typeof(IMenuCommandService)) is OleMenuCommandService commandService)
             {
                 var cmdId = new CommandID(PackageGuids.guidInstallCommandPackageCmdSet, PackageIds.InstallCommandId);
-                var cmd = new OleMenuCommand(Execute, cmdId);
-                cmd.BeforeQueryStatus += BeforeQueryStatus;
+                var cmd = new OleMenuCommand(Execute, cmdId)
+                {
+                    Supported = false
+                };
+
                 commandService.AddCommand(cmd);
             }
         }
@@ -39,12 +41,9 @@ namespace YarnInstaller
             Instance = new InstallCommand(package);
         }
 
-        private void BeforeQueryStatus(object sender, EventArgs e)
+        private void Execute(object sender, EventArgs e)
         {
-            var button = (OleMenuCommand)sender;
-            button.Visible = button.Enabled = false;
-
-            var item = YarnHelper.DTE.SelectedItems.Item(1)?.ProjectItem;
+            EnvDTE.ProjectItem item = YarnHelper.DTE.SelectedItems.Item(1)?.ProjectItem;
 
             if (item == null)
                 return;
@@ -54,13 +53,9 @@ namespace YarnInstaller
             if (!fileName.Equals(Constants.ConfigFileName, StringComparison.OrdinalIgnoreCase))
                 return;
 
-            _cwd = Path.GetDirectoryName(item.FileNames[1]);
-            button.Visible = button.Enabled = true;
-        }
+            string cwd = Path.GetDirectoryName(item.FileNames[1]);
 
-        private void Execute(object sender, EventArgs e)
-        {
-            YarnHelper.Install(_cwd);
+            YarnHelper.Install(cwd);
         }
     }
 }
